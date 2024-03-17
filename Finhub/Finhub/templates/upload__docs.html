@@ -1,0 +1,82 @@
+{% extends "profile.html" %} {% block profile_content%}
+
+<!--Profile incomplete Warning Ends-->
+<div class="profile__card">
+  <div>
+    <div class="profile__user__password__manager">
+      <p class="page__title">Upload Documents</p>
+      <form
+        action="{{url_for('auth.upload_docs')}}"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        {% for doc in docs %} {% if doc.id_document and doc.matric_certificate
+        and doc.academic_transcript and doc.unemployement_affidavit %}
+        <p class="success__status">
+          <i class="fa fa-check-circle" style="margin-right: 8px"></i>
+          Please note tha all the required documents has been uploaded, you can
+          still make updates anytime.
+        </p>
+
+        {% endif %} {% endfor %} {% if not docs %}
+        <p class="unsuccessful">
+          <i class="fa fa-times-circle" style="margin-right: 8px"></i>
+          Please upload your documents as they will be required when applying.
+        </p>
+        {% endif%}
+        <div class="form__group">
+          <label for="id_copy"
+            >Certified ID <span class="required">*</span></label
+          >
+          <input
+            type="file"
+            required
+            accept=".pdf"
+            name="id_copy"
+            id="id_copy"
+          />
+        </div>
+        <div class="form__group">
+          <label for="matric"
+            >Certified Matric Certificate <span class="required">*</span></label
+          >
+          <input
+            type="file"
+            accept=".pdf"
+            name="matric_certificate"
+            id="matric"
+            required
+          />
+        </div>
+        <div class="form__group">
+          <label for="academic_transcript"
+            >Academic Transcript <span class="required">*</span></label
+          >
+          <input
+            type="file"
+            name="academic_transcript"
+            id="academic_transcript"
+            accept=".pdf"
+            required
+          />
+        </div>
+        <div class="form__group">
+          <label for="affidavit"
+            >Employment Affidavit <span class="required">*</span></label
+          >
+          <input
+            type="file"
+            name="affidavit"
+            id="affidavit"
+            accept=".pdf"
+            required
+          />
+        </div>
+        <button type="submit" class="btn__custom btn__success">
+          Upload Docs <i class="fa fa-upload btn__icon__right"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+{%endblock%}
